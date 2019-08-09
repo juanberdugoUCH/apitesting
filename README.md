@@ -1,8 +1,5 @@
 # Foundry Rspec and Capybara Acceptance Automation Tests
-
-This acceptance test suite tests Foundry Environments. Using webdriver into Capybara, tests can run both headless and non-headless.
-
-
+##### This is a set-up guide for MacOs
 ### Dependencies
 
   * Ruby (version in .ruby-version)
@@ -19,12 +16,6 @@ This acceptance test suite tests Foundry Environments. Using webdriver into Capy
 
   * Ack: better than grep
     * `brew install ack`
-
-### Create Accounts
-Github: Create an account and get permission to the Github repository where the tests are held (https://github.com/EverFi/foundry_acceptance_tests)
-CircleCI: Create an account through the website (https://circleci.com/)
-
----
 
 ## Setup Guide
 
@@ -68,7 +59,7 @@ Install Bundler
 
 ### Bundle
 
-After cloning this repository, navigate to the foundry_acceptance_tests directory in Terminal. Use bundler to install dependencies from the gemfile:
+After cloning this repository, navigate to the ruby-capybara-framework directory in Terminal. Use bundler to install dependencies from the gemfile:
 
 ```bash
 gem install bundler
@@ -82,14 +73,14 @@ Copy the variables from `.env.sample`.
 Each variable use is described in the [Running the Tests](#running-the-tests) section.
 
 ## Running the Tests
-* Navigate to your test directory in Terminal (foundry_acceptance_tests) before running commands.
+* Navigate to your test directory in Terminal (ruby-capybara-framework) before running commands.
 
 ### QA Local Rspec
 
 #### With a Browser: (default):
 
-Make sure you've run bundle command in foundry_acceptance_tests folder (or used the brew commands under Installation above), and have chromedriver working.
-Run tests from the root foundry_acceptance_tests folder where spec_helper.rb is contained, so it can be found and loaded.
+Make sure you've run bundle command in ruby-capybara-framework folder (or used the brew commands under Installation above), and have chromedriver working.
+Run tests from the root ruby-capybara-framework folder where spec_helper.rb is contained, so it can be found and loaded.
 ```bash
 rspec spec/features/your_test_script_spec.rb
 ```
@@ -143,4 +134,3 @@ Then, access Edit Configurations... -> Environment variables
 BROWSER_NAME=chrome
 DRIVER=selenium
 ```
-Apply
