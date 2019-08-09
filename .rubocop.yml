@@ -1,0 +1,261 @@
+# This is the configuration used to check the rubocop source code.
+
+require:
+  - rubocop/cop/internal_affairs
+  - rubocop-rspec
+
+AllCops:
+  TargetRubyVersion: 2.4.3
+  Exclude:
+    - vendor/**/*
+
+Naming/PredicateName:
+  # Method define macros for dynamically generated method.
+  MethodDefinitionMacros:
+    - define_method
+    - define_singleton_method
+    - def_node_matcher
+    - def_node_search
+
+Style/SymbolProc:
+  Exclude:
+    - spec/**/*
+
+Style/Lambda:
+  Exclude:
+    - spec/**/*
+
+Style/SymbolArray:
+  Exclude:
+    - spec/**/*
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - spec/**/*
+
+Style/FormatStringToken:
+  Exclude:
+    - spec/**/*
+
+Style/IpAddresses:
+  Exclude:
+  - spec/**/*
+
+Style/ColonMethodCall:
+  Exclude:
+    - specs/**/*
+
+Style/StringLiterals:
+  Exclude:
+    - spec/**/*
+
+Style/IdenticalConditionalBranches:
+  Exclude:
+    - spec/**/*
+
+Style/WordArray:
+  Exclude:
+    - spec/**/*
+
+Style/CommandLiteral:
+  Exclude:
+    - spec/**/*
+
+#Layout/EndOfLine:
+#  EnforcedStyle: lf
+
+Layout/ClassStructure:
+  Enabled: true
+  Categories:
+    module_inclusion:
+      - include
+      - prepend
+      - extend
+  ExpectedOrder:
+      - module_inclusion
+      - constants
+      - public_class_methods
+      - initializer
+      - instance_methods
+      - protected_methods
+      - private_methods
+
+Layout/IndentHeredoc:
+  EnforcedStyle: powerpack
+
+Layout/TrailingWhitespace:
+  Exclude:
+    - spec/**/*
+
+Layout/BlockEndNewline:
+  Exclude:
+    - spec/**/*
+
+Layout/SpaceInsideBlockBraces:
+  Exclude:
+    - spec/**/* 
+
+Layout/SpaceInsideParens:
+  Exclude:
+  -  spec/**/*
+
+Layout/LeadingCommentSpace:
+  Exclude:
+    - spec/**/*
+
+Layout/EmptyLinesAroundBlockBody:
+  Exclude:
+    - spec/**/*
+
+Layout/MultilineBlockLayout:
+  Exclude:
+    - spec/**/*
+
+Layout/MultilineMethodCallIndentation:
+  Exclude:
+    - spec/**/*
+
+Layout/IndentationConsistency:
+  Exclude:
+    - spec/**/*
+
+Layout/BlockAlignment:
+  Exclude:
+  -  spec/**/*
+
+Layout/CommentIndentation:
+  Exclude:
+    - spec/**/*
+
+Layout/IndentationWidth:
+  Exclude:
+    - spec/**/*
+
+Layout/EmptyLines:
+  Exclude:
+    - spec/**/*
+
+Layout/TrailingBlankLines:
+  Exclude:
+    - spec/**/*
+
+Lint/AmbiguousBlockAssociation:
+  Exclude:
+    - spec/**/*
+
+Lint/InterpolationCheck:
+  Exclude:
+    - spec/**/*
+
+Lint/UselessAccessModifier:
+  MethodCreatingMethods:
+    - 'def_matcher'
+    - 'def_node_matcher'
+
+Lint/BooleanSymbol:
+  Enabled: false
+
+Lint/ParenthesesAsGroupedExpression:
+  Exclude:
+    - spec/**/*
+
+Metrics/BlockLength:
+  Exclude:
+    - 'Rakefile'
+    - '**/*.rake'
+    - spec/**/*
+
+Metrics/ModuleLength:
+  Exclude:
+    - spec/**/*
+
+Metrics/LineLength:
+  Max: 120
+
+Metrics/CyclomaticComplexity:
+  Max: 6
+
+Metrics/BlockNesting:
+  Max: 3
+
+Metrics/ClassLength:
+  Max: 100
+
+Metrics/PerceivedComplexity:
+  Max: 3
+
+Naming/FileName:
+  Exclude:
+    - spec/**/*
+
+Performance/Caller:
+  Exclude:
+    - spec/rubocop/cop/performance/caller_spec.rb
+
+RSpec/BeforeAfterAll:
+  Exclude:
+    - spec/**/*
+
+RSpec/PredicateMatcher:
+  EnforcedStyle: explicit
+
+RSpec/NestedGroups:
+  Max: 7
+
+RSpec/ContextWording:
+  Exclude:
+    - spec/**/*
+
+RSpec/PredicateMatcher:
+  Exclude:
+  - spec/**/*
+
+RSpec/InstanceVariable:
+  Exclude:
+  - spec/**/*
+
+RSpec/ExampleLength:
+  Max: 20
+
+RSpec/MultipleExpectations:
+  Exclude:
+    - spec/**/*
+
+RSpec/ScatteredLet:
+  Exclude:
+    - spec/**/*
+
+RSpec/LetBeforeExamples:
+  Exclude:
+    - spec/**/*
+
+RSpec/EmptyExampleGroup:
+  Exclude:
+    - spec/**/*
+
+RSpec/ExampleWording:
+  Exclude:
+    - spec/**/*
+
+RSpec/ExampleLength:
+  Max: 31
+
+Style/AndOr:
+  Exclude:
+    - spec/**/*
+
+Style/GuardClause:
+  Exclude:
+    - spec/**/*
+
+Style/HashSyntax:
+  Exclude:
+    - spec/**/*
+
+Style/TrailingCommaInArrayLiteral:
+  Exclude:
+    - spec/**/*
+
+Style/NumericLiterals:
+  Exclude:
+    - spec/**/*

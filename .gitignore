@@ -1,0 +1,11 @@
+.env
+# Phantomjs cookie
+cookiejar.cookie
+
+
+.idea
+.DS_Store
+
+
+# Local yml
+tmp/screenshots
