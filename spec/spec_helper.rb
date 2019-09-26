@@ -37,60 +37,6 @@ FIXTURES = ActiveSupport::HashWithIndifferentAccess.new(
     yml_files.each_with_object({}) { |f, h| h.deep_merge!(YAML.safe_load(ERB.new(File.read(f)).result)) }
 )
 
-Capybara.save_path = './tmp/screenshots'
-Capybara::Screenshot.register_filename_prefix_formatter(:rspec) do |example|
-  example.example_group.description.tr(' ', '-') + '_' +
-      example.description.tr(' ', '-').gsub(%r{^.*/spec/}, '').gsub(/QA-(.*)/, '')
-end
-
-profile = Selenium::WebDriver::Chrome::Profile.new
-
-Capybara.register_driver :headless_chrome do |app|
-  Capybara.javascript_driver = :headless_chrome
-
-  Capybara::Selenium::Driver.new(
-      app,
-      browser: :chrome,
-      profile: profile,
-      args: ['--headless', '--disable-gpu', '--lang=en'],
-      prefs: {
-          intl: {
-              accept_languages: 'en,en_US'
-          },
-          download: {
-              prompt_for_download: false,
-              default_directory: TestHelpers::Download::PATH.to_s
-          }
-      }
-  )
-end
-
-# Local browser
-Capybara.register_driver :selenium do |app|
-  Capybara::Selenium::Driver.new(
-      app,
-      browser: :chrome,
-      profile: profile,
-      args: ['--window-size=1920,1080', '--lang=en'],
-      prefs: {
-          intl: {
-              accept_languages: 'en,en_US'
-          },
-          download: {
-              prompt_for_download: false,
-              default_directory: TestHelpers::Download::PATH.to_s
-          }
-      }
-  )
-end
-
-Capybara.configure do |config|
-  config.run_server = false
-  config.default_driver = ENV.fetch('DRIVER', nil)&.to_sym || :selenium
-  config.app_host = 'https://www.youtube.com'
-  config.enable_aria_label = true
-end
-
 RSpec.configure do |config|
   config.include Capybara::DSL
   config.include Capybara::RSpecMatchers
@@ -104,40 +50,11 @@ RSpec.configure do |config|
   end
 end
 
-RSpec.configure do |config|
-  config.before do |example|
-    Capybara.reset! if example.metadata[:reset_session]
-    if example.metadata[:legacy]
-      puts example.metadata[:full_description]
-      # TestHelpers::Download.clear_downloads
-      Capybara.reset!
-      # Slow Down Selenium Tests
-      # Otherwise it's too fast to watch
-      module Selenium
-        module WebDriver
-          module Remote
-            class Bridge
-              def execute(*args)
-                res = raw_execute(*args)['value']
-                sleep 0.1
-                res
-              end
-            end
-          end
-        end
-      end
-    end
-  end
-end
-
 # Repeat configuration
 RETRIES = 3
 
 REPEATABLE_EXCEPTIONS = [
     Net::ReadTimeout,
-    Selenium::WebDriver::Error::WebDriverError,
-    SitePrism::TimeoutError,
-    Capybara::ElementNotFound,
     Timeout::Error
 ].freeze
 
@@ -149,19 +66,6 @@ RSpec.configure do |config|
 end
 
 RSpec.configure do |config|
-  config.append_after do |scenario|
-    Capybara.reset! if scenario.metadata[:reset_session]
-    if scenario.metadata[:legacy]
-      visit '/'
-      Capybara.reset!
-      Capybara.use_default_driver
-    end
-  end
-
-  config.append_after :suite do
-    # TestHelpers::Download.clear_downloads
-  end
-
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
     expectations.syntax = %i[should expect]
@@ -178,8 +82,6 @@ RSpec.configure do |config|
 
   config.filter_run_excluding exclude: true
 end
-
-# TestHelpers::Rspec.print_session_id_if_remote
 
 # with_repeat method helper
 def with_repeat # rubocop:disable Metrics/MethodLength
